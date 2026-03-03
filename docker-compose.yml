@@ -1,0 +1,35 @@
+services:
+  # O Banco de Dados
+  mongodb:
+    image: mongo:latest
+    container_name: mongodb_crud
+    ports:
+      - "27017:27017" # Porta para o Compass conectar
+    volumes:
+      - mongo_data:/data/db
+
+  # O Coração (PHP)
+  backend:
+    build: ./backend
+    container_name: php_api
+    ports:
+      - "8000:80" # Acesso via http://localhost:8000
+    volumes:
+      - ./backend:/var/www/html
+    depends_on:
+      - mongodb
+
+  # A Cara do Projeto (React)
+  frontend:
+    build: ./frontend
+    container_name: react_app
+    ports:
+      - "3000:3000" # Acesso via http://localhost:3000
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules # Evita que o Docker sobrescreva os pacotes locais
+    stdin_open: true # Mantém o terminal do React interativo
+    tty: true
+
+volumes:
+  mongo_data:

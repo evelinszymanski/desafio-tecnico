@@ -1,0 +1,16 @@
+{
+    "name": "evelin/backend",
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "evelin"
+        }
+    ],
+    "require": {
+        "mongodb/mongodb": "^2.2"
+    }
+}
