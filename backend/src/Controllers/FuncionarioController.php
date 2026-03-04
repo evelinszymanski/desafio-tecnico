@@ -14,7 +14,26 @@ class FuncionarioController {
     }
 
     public function index(): void {
-        $data = $this->collection->find()->toArray();
+        $filters = [];
+        
+        if (!empty($_GET['department'])) {
+            $filters['department'] = $_GET['department'];
+        }
+
+        if (!empty($_GET['status'])) {
+            $filters['status'] = $_GET['status'];
+        }
+
+        if (!empty($_GET['employment_type'])) {
+            $filters['employment_type'] = $_GET['employment_type'];
+        }
+
+        if (!empty($_GET['work_model'])) {
+            $filters['work_model'] = $_GET['work_model'];
+        }
+
+        $cursor = $this->collection->find($filters);
+        $data = $cursor->toArray();
         // Converte _id para string
         foreach ($data as &$item) {
             $item['_id'] = (string)$item['_id'];
