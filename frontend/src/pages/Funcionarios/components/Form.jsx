@@ -74,7 +74,7 @@ const Form = ({ data, closeForm, saveForm }) => {
         <Stack 
             component="form" 
             onSubmit={handleSubmit(handleFormSubmit)} 
-            sx={{ height: '100%', width: 500, p: 4, gap: 4 }}
+            sx={{ height: '100%', width: { xs: '90vw', sm: 500 }, p: 4, gap: 4 }}
         >
             <Box component="header" display="flex" alignItems="center" gap={2}>
                 <BgIcon icon={ data ? "edit" : "add" } color="secondary"/>
