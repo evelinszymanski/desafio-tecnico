@@ -5,32 +5,24 @@ import { RouterProvider } from 'react-router-dom'
 import { router } from './routes.jsx'
 import { ThemeProvider, createTheme } from '@mui/material/styles'
 import { ToastContainer } from 'react-toastify';
+import { LocalizationProvider } from '@mui/x-date-pickers';
+import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
+import 'moment/locale/pt-br';
+import moment from 'moment';
+import { theme as customTheme } from './styles/theme.js';
 
-
-const theme = createTheme({
-  palette: {
-    primary: {
-      main: '#1E293B',
-      light: '#334155',
-      dark: '#0F172A',
-      contrastText: '#FFFFFF'
-    },
-    secondary: {
-      main: '#2DD4BF',
-      light: '#5EEAD4',
-      dark: '#14B8A6',
-      contrastText: '#0F172A'
-    }
-  }
-});
+const theme = createTheme(customTheme);
+moment.locale('pt-br');
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <ThemeProvider theme={theme}>
-      <AuthProvider>
-        <RouterProvider router={router} />
-        <ToastContainer theme='colored' closeOnClick autoClose={2000}/>
-      </AuthProvider>
+      <LocalizationProvider dateAdapter={AdapterMoment} adapterLocale='pt-br'>
+        <AuthProvider>
+          <RouterProvider router={router} />
+          <ToastContainer theme='colored' closeOnClick autoClose={2000}/>
+        </AuthProvider>
+      </LocalizationProvider>
     </ThemeProvider>
-  </StrictMode>,
+  </StrictMode>
 )

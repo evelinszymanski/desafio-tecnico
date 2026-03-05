@@ -1,6 +1,6 @@
-const Logo = ({ img = "/logo.png", h=240 }) => {
+const Logo = ({ src = "/logo.png", h=240 }) => {
     return (
-        <img src={img} alt="Logo" height={h} />
+        <img src={src} alt="Logo" height={h} />
     )
 };
 

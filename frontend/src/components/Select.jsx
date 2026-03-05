@@ -1,0 +1,27 @@
+import { MenuItem, Select as MSelect, InputLabel, FormControl } from '@mui/material';
+
+const Select = ({ label, options = [], onChange, value, ...props }) => { 
+    return ( 
+        <FormControl fullWidth>
+            <InputLabel id={`${label}-inputLabel}`}>
+                {label}
+            </InputLabel>
+            <MSelect 
+                id={`${label}-field`}
+                labelId={`${label}-labelId`}
+                label={label} 
+                value={value}
+                defaultValue=""
+                onChange={onChange}
+                {...props}
+            >
+                {options.map(option => ( 
+                    <MenuItem key={option} value={option} sx={{ textTransform: 'capitalize'}}> 
+                        {option}
+                    </MenuItem> 
+                ))} 
+            </MSelect>
+        </FormControl> 
+    ) 
+}; 
+export default Select;

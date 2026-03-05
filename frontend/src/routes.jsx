@@ -17,6 +17,10 @@ export const router = createBrowserRouter([{
         {
             path: '/funcionarios',
             element: <Funcionarios />
+        },
+        {
+            path: '/funcionarios/:id',
+            element: <Funcionarios />
         }
     ]
 }])
