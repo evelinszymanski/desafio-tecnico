@@ -16,6 +16,16 @@ class FuncionarioController {
     public function index(): void {
         $filters = [];
         
+        if (!empty($_GET['search'])) {
+            $searchString = $_GET['search'];
+            // 'i' significa case-insensitive (não diferencia maiúsculas de minúsculas)
+            $regex = new \MongoDB\BSON\Regex($searchString, 'i');
+            $filters['$or'] = [
+                ['name' => $regex],
+                ['role' => $regex]
+            ];
+        }
+
         if (!empty($_GET['department'])) {
             $filters['department'] = $_GET['department'];
         }
@@ -42,7 +52,7 @@ class FuncionarioController {
         echo json_encode([
             'code' => 200,
             'data' => $data,
-            'total' => count($data)
+            'total' => count($data),
         ]);
     }
 
