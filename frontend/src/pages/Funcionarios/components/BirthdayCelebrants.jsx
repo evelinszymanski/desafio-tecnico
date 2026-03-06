@@ -1,8 +1,9 @@
 import moment from "moment";
-import { Avatar, Card, CardContent, CardHeader, Icon, List, ListItem, ListItemAvatar, ListItemText, Typography } from "@mui/material";
+import { Avatar, Card, CardContent, CardHeader, Icon, List, ListItem, ListItemAvatar, ListItemText, Typography, useTheme } from "@mui/material";
 import { stringAvatar } from "../../../utils/stringAvatar";
 
 const BirthdayCelebrants = ({ celebrants }) => {
+    const theme = useTheme();
     const currentMonth = moment().format('MMMM');
     
     const calculateDaysLeft = (birthday) => {
@@ -23,7 +24,13 @@ const BirthdayCelebrants = ({ celebrants }) => {
     };
 
     return (
-        <Card sx={{ flex: 1 }}>
+        <Card 
+            sx={{ 
+                boxShadow: 'none',
+                border: '1px solid',
+                borderColor: theme.palette.grey[200]
+            }}
+        >
             <CardHeader 
                 avatar={<Icon>celebration</Icon>}
                 title={`Aniversariantes de ${currentMonth}`}

@@ -11,6 +11,7 @@ import Table from "../../components/Table";
 import Form from "./components/Form";
 import Dialog from "../../components/Dialog";
 import BirthdayCelebrants from "./components/BirthdayCelebrants";
+import DepartmentsChart from "./components/DepartmentsChart";
 
 const Funcionarios = () => {
     const { id } = useParams();
@@ -177,8 +178,11 @@ const Funcionarios = () => {
                             />
                         </Stack>
                     </Grid>
-                    <Grid size={{ xs: 12, md: 3}} sx={{ flex: 1 }}>
-                        <BirthdayCelebrants celebrants={birthdayCelebrants}/>
+                    <Grid size={{ xs: 12, md: 3}}>
+                        <Stack gap={2}>
+                            <BirthdayCelebrants celebrants={birthdayCelebrants}/>
+                            <DepartmentsChart employees={employees} />
+                        </Stack>
                     </Grid>
                 </Grid>
             </Grid>
