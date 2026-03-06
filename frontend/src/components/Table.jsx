@@ -12,10 +12,10 @@ const Table = ({ columns, rows }) => {
             rows={rows}
             columns={columns}
             sx={tableTheme}
-            pageSizeOptions={[5]}
+            pageSizeOptions={[10]}
             initialState={{
                 pagination: {
-                    paginationModel: { pageSize: 10, page: 0 },
+                    paginationModel: { pageSize: 10 },
                 }
             }}
             localeText={{

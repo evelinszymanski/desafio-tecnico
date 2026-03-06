@@ -123,10 +123,6 @@ const Funcionarios = () => {
     };
 
     useEffect(() => {
-        fetchEmployees();
-    }, []);
-
-    useEffect(() => {
         fetchEmployees(filters);
     }, [filters]);
 

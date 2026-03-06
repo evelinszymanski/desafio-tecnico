@@ -8,7 +8,8 @@ const Select = ({ label, options = [], onChange, value, ...props }) => {
             </InputLabel>
             <MSelect 
                 id={`${label}-field`}
-                labelId={`${label}-labelId`}
+                name={`${label}-field`}
+                labelId={`${label}-inputLabel`}
                 label={label} 
                 value={value}
                 defaultValue=""
