@@ -61,8 +61,6 @@ const Funcionarios = () => {
             const response = await fetch(endpoints.aniversariantes);
             const responseJson = await response.json();
             const data = responseJson.data || [];
-            console.log('responseJson', responseJson);
-            console.log('data', data);
             
             if (!response.ok) {
                 const errorData = await response.json();

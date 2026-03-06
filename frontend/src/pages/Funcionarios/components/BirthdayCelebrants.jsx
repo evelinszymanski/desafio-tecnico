@@ -42,7 +42,12 @@ const BirthdayCelebrants = ({ celebrants }) => {
             <CardContent sx={{ maxHeight: 320, overflowY: 'auto' }}>
                 <List disablePadding>
                     {celebrants.map((celebrant) => (
-                        <ListItem divider dense disableGutters>
+                        <ListItem 
+                            key={celebrant._id}
+                            divider
+                            dense
+                            disableGutters
+                        >
                             <ListItemAvatar>
                                 <Avatar 
                                     {...stringAvatar(celebrant.name)}
