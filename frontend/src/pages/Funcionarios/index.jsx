@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
-import { Container, Drawer, Grid } from "@mui/material";
+import { Container, Drawer, Grid, Stack } from "@mui/material";
 import { endpoints } from "../../services/endpoints";
 import Header from "./components/Header";
 import Widgets from "./components/Widgets";
@@ -10,11 +10,13 @@ import Table from "../../components/Table";
 import Form from "./components/Form";
 import Dialog from "../../components/Dialog";
 import { columns } from "./table/columns";
+import BirthdayCelebrants from "./components/BirthdayCelebrants";
 
 const Funcionarios = () => {
     const { id } = useParams();
     const navigate = useNavigate();
     const [employees, setEmployees] = useState([]);
+    const [birthdayCelebrants, setBirthdayCelebrants] = useState([]);
     const [openForm, setOpenForm] = useState(false);
     const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
     const [employee, setEmployee] = useState(null);
@@ -36,6 +38,11 @@ const Funcionarios = () => {
             const responseJson = await response.json();
             const data = responseJson.data || [];
 
+            if (!response.ok) {
+                const errorData = await response.json();
+                throw new Error(errorData.message || 'Falha ao carregar funcionários.');
+            };
+
             setEmployees(data);
             setWidgetsData(prev => ({
                 ...prev,
@@ -45,7 +52,27 @@ const Funcionarios = () => {
             }));
         } catch (error) {
             console.error('Error:', error);
-            toast.error(error.message);  
+            toast.error(error.message);
+        };
+    };
+
+    const fetchBirthdayCelebrants = async () => {
+        try {
+            const response = await fetch(endpoints.aniversariantes);
+            const responseJson = await response.json();
+            const data = responseJson.data || [];
+            console.log('responseJson', responseJson);
+            console.log('data', data);
+            
+            if (!response.ok) {
+                const errorData = await response.json();
+                throw new Error(errorData.message || 'Falha ao carregar aniversariantes do mês.');
+            };
+
+            setBirthdayCelebrants(data);
+        } catch (error) {
+            console.error('error:', error);
+            toast.error(error.message);
         };
     };
 
@@ -84,7 +111,8 @@ const Funcionarios = () => {
             });
             
             if (!response.ok) {
-                throw new Error('Erro ao excluir funcionário.');
+                const errorData = await response.json();
+                throw new Error(errorData.message || 'Falha ao excluir funcionário.');
             };
 
             toast.success("Funcionário excluído com sucesso!");
@@ -123,6 +151,10 @@ const Funcionarios = () => {
     };
 
     useEffect(() => {
+        fetchBirthdayCelebrants();
+    }, [])
+
+    useEffect(() => {
         fetchEmployees(filters);
     }, [filters]);
 
@@ -131,9 +163,16 @@ const Funcionarios = () => {
             <Grid container spacing={4}>
                 <Header handleOpen={handleOpen} />
                 <Widgets data={widgetsData} />
-                <Filters setFilters={setFilters} />
-                <Grid size={12} component="section">
-                    <Table columns={columns(handleOpen)} rows={employees} />
+                <Grid size={12} component="section" container flexDirection={{ xs: "column", md: "row" }} gap={3}>
+                    <Grid size={{ xs: 12, md: 9}}>
+                        <Stack gap={4}>
+                            <Filters setFilters={setFilters} />
+                            <Table columns={columns(handleOpen)} rows={employees} />
+                        </Stack>
+                    </Grid>
+                    <Grid size={{ xs: 12, md: 3}}>
+                        <BirthdayCelebrants celebrants={birthdayCelebrants}/>
+                    </Grid>
                 </Grid>
             </Grid>
             <Dialog 
