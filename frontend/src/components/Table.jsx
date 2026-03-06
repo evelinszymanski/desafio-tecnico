@@ -1,8 +1,7 @@
 import { DataGrid } from '@mui/x-data-grid';
-import { TableTheme } from '../styles/theme';
+import { tableTheme } from '../styles/theme';
 
 const Table = ({ columns, rows }) => {
-
     return (
         <DataGrid
             disableColumnSelector
@@ -12,7 +11,7 @@ const Table = ({ columns, rows }) => {
             rowSelection={false}
             rows={rows}
             columns={columns}
-            sx={TableTheme}
+            sx={tableTheme}
             pageSizeOptions={[5]}
             initialState={{
                 pagination: {

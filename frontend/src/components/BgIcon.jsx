@@ -8,7 +8,7 @@ export const BgIcon = ({ icon, color = 'primary', size = 56 }) => {
     return (
         <Box 
             sx={{
-                bgcolor: `${lightColor}60`, 
+                bgcolor: lightColor, 
                 width: size, 
                 height: size, 
                 display: "flex", 
