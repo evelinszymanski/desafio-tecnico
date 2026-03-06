@@ -4,7 +4,7 @@ import Button from "../../../components/Button";
 
 const Header = ({ handleOpen }) => {
     return (
-        <Grid size={12} component="header" display="flex" flexDirection={{ xs: "column", md: "row" }} gap={2}>
+        <Grid size={12} container component="header" display="flex" flexDirection={{ xs: "column", md: "row" }} >
             <Grid size={{ xs: 12, md: 6 }} display="flex" alignItems="center" gap={2}>
                 <BgIcon icon="people" color="primary" />
                 <Stack>

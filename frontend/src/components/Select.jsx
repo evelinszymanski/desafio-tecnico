@@ -1,8 +1,8 @@
 import { MenuItem, Select as MSelect, InputLabel, FormControl } from '@mui/material';
 
-const Select = ({ label, options = [], onChange, value, ...props }) => { 
+const Select = ({ label, options = [], onChange, value, size = "small", ...props }) => { 
     return ( 
-        <FormControl fullWidth>
+        <FormControl fullWidth size={size}>
             <InputLabel id={`${label}-inputLabel}`}>
                 {label}
             </InputLabel>

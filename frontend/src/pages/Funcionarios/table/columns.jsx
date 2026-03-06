@@ -9,7 +9,7 @@ export const columns = (handleOpen) => [
         field: 'name',
         headerName: 'Funcionário',
         flex: 1,
-        minWidth: 150,
+        minWidth: 200,
         renderCell: (params) => {
             return (
                 <Stack justifyContent="center" height="100%">
@@ -17,7 +17,7 @@ export const columns = (handleOpen) => [
                         {params?.value}
                     </Typography>
                     <Typography variant="caption" color="text.secondary">
-                        {params?.email}
+                        {params?.row?.email}
                     </Typography>
                 </Stack>
             )
@@ -77,6 +77,7 @@ export const columns = (handleOpen) => [
         field: "status",
         headerName: "Status",
         flex: 0.8,
+        minWidth: 80,
         renderCell: (params) => {
             return (
                 <Chip
