@@ -1,16 +1,15 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { endpoints } from "../../services/endpoints";
 import { toast } from "react-toastify";
-import { Box, Container, Drawer, Grid, IconButton, Tooltip } from "@mui/material";
-import EditIcon from '@mui/icons-material/Edit';
-import DeleteIcon from '@mui/icons-material/Delete';
+import { Container, Drawer, Grid } from "@mui/material";
+import { endpoints } from "../../services/endpoints";
 import Header from "./components/Header";
 import Widgets from "./components/Widgets";
 import Filters from "./components/Filters";
 import Table from "../../components/Table";
 import Form from "./components/Form";
 import Dialog from "../../components/Dialog";
+import { columns } from "./table/columns";
 
 const Funcionarios = () => {
     const { id } = useParams();
@@ -123,34 +122,6 @@ const Funcionarios = () => {
         };
     };
 
-    const columns = [
-        { field: 'name', headerName: 'Funcionário', flex: 1, minWidth: 150 },
-        { field: 'role', headerName: 'Cargo', flex: 1, minWidth: 120 },
-        { field: 'department', headerName: 'Departamento', flex: 1, minWidth: 120 },
-        { field: 'admission_date', headerName: 'Admissão', flex: 0.8, minWidth: 120 },
-        { field: 'work_model', headerName: 'Modelo', flex: 0.8, minWidth: 120 },
-        { field: 'employment_type', headerName: 'Tipo', flex: 0.8, minWidth: 120 },
-        { field: 'status', headerName: 'Status', flex: 0.8, minWidth: 100 },
-        {
-            field: 'actions',
-            headerName: 'Ações',
-            minWidth: 100,
-            renderCell: (params) => 
-            <Box display="flex">
-                <Tooltip title="Editar" arrow>
-                    <IconButton color="primary" onClick={() => handleOpen(params.id, "edit")}>
-                        <EditIcon fontSize="inherit" />
-                    </IconButton>
-                </Tooltip>
-                <Tooltip title="Excluir" arrow>
-                    <IconButton color="error" onClick={() => handleOpen(params.id, "delete")}>
-                        <DeleteIcon fontSize="inherit" />
-                    </IconButton>
-                </Tooltip>
-            </Box>
-        },
-    ];
-
     useEffect(() => {
         fetchEmployees();
     }, []);
@@ -162,11 +133,11 @@ const Funcionarios = () => {
     return (
         <Container maxWidth="xl" sx={{ py: 4 }}>
             <Grid container spacing={4}>
-                <Header handleOpen={handleOpen}/>
-                <Widgets data={widgetsData}/>
-                <Filters setFilters={setFilters}/>
+                <Header handleOpen={handleOpen} />
+                <Widgets data={widgetsData} />
+                <Filters setFilters={setFilters} />
                 <Grid size={12} component="section">
-                    <Table columns={columns} rows={employees} />
+                    <Table columns={columns(handleOpen)} rows={employees} />
                 </Grid>
             </Grid>
             <Dialog 

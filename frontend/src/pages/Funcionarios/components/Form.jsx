@@ -13,8 +13,7 @@ const Form = ({ data, closeForm, saveForm }) => {
     const { 
         control, 
         handleSubmit, 
-        reset, 
-        formState: { errors } 
+        reset,
     } = useForm({
         defaultValues: {
             _id: "",
