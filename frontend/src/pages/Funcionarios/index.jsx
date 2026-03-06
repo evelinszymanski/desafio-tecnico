@@ -3,13 +3,13 @@ import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import { Container, Drawer, Grid, Stack } from "@mui/material";
 import { endpoints } from "../../services/endpoints";
+import { columns } from "./table/columns";
 import Header from "./components/Header";
 import Widgets from "./components/Widgets";
 import Filters from "./components/Filters";
 import Table from "../../components/Table";
 import Form from "./components/Form";
 import Dialog from "../../components/Dialog";
-import { columns } from "./table/columns";
 import BirthdayCelebrants from "./components/BirthdayCelebrants";
 
 const Funcionarios = () => {
@@ -161,14 +161,23 @@ const Funcionarios = () => {
             <Grid container spacing={4}>
                 <Header handleOpen={handleOpen} />
                 <Widgets data={widgetsData} />
-                <Grid size={12} component="section" container flexDirection={{ xs: "column", md: "row" }} gap={3}>
+                <Grid 
+                    size={12}
+                    container
+                    spacing={2}
+                    component="section"
+                    flexDirection={{ xs: "column", md: "row" }} 
+                >
                     <Grid size={{ xs: 12, md: 9}}>
                         <Stack gap={4}>
                             <Filters setFilters={setFilters} />
-                            <Table columns={columns(handleOpen)} rows={employees} />
+                            <Table 
+                                columns={columns(handleOpen)}
+                                rows={employees}
+                            />
                         </Stack>
                     </Grid>
-                    <Grid size={{ xs: 12, md: 3}}>
+                    <Grid size={{ xs: 12, md: 3}} sx={{ flex: 1 }}>
                         <BirthdayCelebrants celebrants={birthdayCelebrants}/>
                     </Grid>
                 </Grid>
