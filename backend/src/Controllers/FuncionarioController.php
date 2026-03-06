@@ -42,7 +42,10 @@ class FuncionarioController {
             $filters['work_model'] = $_GET['work_model'];
         }
 
-        $cursor = $this->collection->find($filters);
+        $cursor = $this->collection->find($filters, [
+            'sort' => ['name' => 1]
+        ]);
+
         $data = $cursor->toArray();
         // Converte _id para string
         foreach ($data as &$item) {
