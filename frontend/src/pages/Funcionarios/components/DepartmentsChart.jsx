@@ -30,7 +30,7 @@ const DepartmentsChart = ({ employees }) => {
         setSeries([{
             data,
             highlightScope: { fade: 'global', highlight: 'item' },
-            faded: { innerRadius: 30, additionalRadius: -30, color: 'gray' },
+            faded: { innerRadius: 30, additionalRadius: -30, color: theme.palette.grey[400] },
         }]);
     }, [employees, total]);
 

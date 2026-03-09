@@ -45,12 +45,14 @@ const Funcionarios = () => {
             };
 
             setEmployees(data);
-            setWidgetsData(prev => ({
-                ...prev,
-                total: data.length,
-                active: data.filter(emp => emp.status === 'ativo').length,
-                absent: data.filter(emp => emp.status === 'ausente').length,
-            }));
+            if (!filters) {
+                setWidgetsData(prev => ({
+                    ...prev,
+                    total: data.length,
+                    active: data.filter(emp => emp.status === 'ativo').length,
+                    absent: data.filter(emp => emp.status === 'ausente').length,
+                }));
+            };
         } catch (error) {
             console.error('Error:', error);
             toast.error(error.message);

@@ -139,7 +139,7 @@ const Form = ({ data, closeForm, saveForm }) => {
                     name="employment_type"
                     label="Tipo"
                     control={control}
-                    options={EMPLOY_FILTERS.employtment_type}
+                    options={EMPLOY_FILTERS.employment_type}
                     type="select"
                 />
                 <RHFInput
