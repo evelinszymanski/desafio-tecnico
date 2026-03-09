@@ -1,7 +1,7 @@
 import { DataGrid } from '@mui/x-data-grid';
 import { tableTheme } from '../styles/theme';
 
-const Table = ({ columns, rows }) => {
+const Table = ({ columns, rows, loading }) => {
     return (
         <DataGrid
             disableColumnSelector
@@ -21,6 +21,7 @@ const Table = ({ columns, rows }) => {
             localeText={{
                 noRowsLabel: 'Nenhum funcionário encontrado',
             }}
+            loading={loading}
 
         />
     )

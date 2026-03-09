@@ -17,11 +17,13 @@ const Funcionarios = () => {
     const { id } = useParams();
     const navigate = useNavigate();
     const [employees, setEmployees] = useState([]);
+    const [filteredEmployees, setFilteredEmployees] = useState([]);
     const [birthdayCelebrants, setBirthdayCelebrants] = useState([]);
     const [openForm, setOpenForm] = useState(false);
     const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
     const [employee, setEmployee] = useState(null);
     const [filters, setFilters] = useState('');
+    const [loading, setLoading] = useState(false);
     const [widgetsData, setWidgetsData] = useState({
         total: 0,
         active: 0,
@@ -35,6 +37,7 @@ const Funcionarios = () => {
             : endpoints.funcionarios;
 
         try {
+            setLoading(true);
             const response = await fetch(url);
             const responseJson = await response.json();
             const data = responseJson.data || [];
@@ -44,11 +47,12 @@ const Funcionarios = () => {
                 throw new Error(errorData.message || 'Falha ao carregar funcionários.');
             };
 
-            setEmployees(data);
+            setFilteredEmployees(data);
             if (!filters) {
+                setEmployees(data);
                 setWidgetsData(prev => ({
                     ...prev,
-                    total: data.length,
+                    total: responseJson.total,
                     active: data.filter(emp => emp.status === 'ativo').length,
                     absent: data.filter(emp => emp.status === 'ausente').length,
                 }));
@@ -56,6 +60,8 @@ const Funcionarios = () => {
         } catch (error) {
             console.error('Error:', error);
             toast.error(error.message);
+        } finally {
+            setLoading(false);
         };
     };
 
@@ -78,7 +84,7 @@ const Funcionarios = () => {
     };
 
     const handleOpen = (tmpEmployeeId, type) => {
-        const employee = employees.find(emp => emp._id === tmpEmployeeId);
+        const employee = filteredEmployees.find(emp => emp._id === tmpEmployeeId);
         setEmployee(employee);
 
         if (type === "create") {
@@ -176,7 +182,8 @@ const Funcionarios = () => {
                             <Filters setFilters={setFilters} />
                             <Table 
                                 columns={columns(handleOpen)}
-                                rows={employees}
+                                rows={filteredEmployees}
+                                loading={loading}
                             />
                         </Stack>
                     </Grid>
