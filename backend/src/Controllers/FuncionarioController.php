@@ -153,6 +153,7 @@ class FuncionarioController {
                 ['$set' => $funcionario->toArray()]
             );
 
+            http_response_code(200);
             echo json_encode([
                 'message' => 'Funcionário atualizado com sucesso!',
                 'modifiedCount' => $result->getModifiedCount()
@@ -171,11 +172,25 @@ class FuncionarioController {
     }
 
     public function destroy(string $id): void {
-        $this->collection->deleteOne([
-            '_id' => new ObjectId($id)
-        ]);
+        try {
+            if (!$id) {
+                http_response_code(404);
+                echo json_encode(['error' => 'Funcionário não encontrado.']);
+                return;
+            }
 
-        echo json_encode(['deleted' => true]);
+            $this->collection->deleteOne([
+                '_id' => new ObjectId($id)
+            ]);
+
+            http_response_code(200);
+            echo json_encode([
+                'message' => "Funcionário excluído com sucesso!"
+            ]);
+        } catch (\Exception $e) {
+            http_response_code(500);
+            echo json_encode(['error' => 'Erro interno:' . $e->getMessage()]);
+        }
     }
 
     public function aniversariantes(): void {
