@@ -1,5 +1,6 @@
-import { Box, Card, Paper, Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import { BgIcon } from "./BgIcon";
+import CountUp from "react-countup";
 
 const Widget = ({ data, subtitle, iconType, iconColor }) => {
     const styles = {
@@ -10,7 +11,7 @@ const Widget = ({ data, subtitle, iconType, iconColor }) => {
         px: 2,
         border: '1px solid',
         borderColor: 'grey.200',
-        borderRadius: 2,
+        borderRadius: 1.5,
         bgcolor: 'background.paper',
     };
 
@@ -19,7 +20,10 @@ const Widget = ({ data, subtitle, iconType, iconColor }) => {
             <BgIcon icon={iconType} color={iconColor}/>
             <Box>
                 <Typography variant="h5" fontWeight={600}>
-                    {data}
+                    <CountUp
+                        end={data}
+                        duration={1}
+                    />
                 </Typography>
                 <Typography variant="body2" color="grey.600">
                     {subtitle}

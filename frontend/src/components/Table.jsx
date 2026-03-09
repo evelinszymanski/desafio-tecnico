@@ -11,6 +11,7 @@ const Table = ({ columns, rows, loading }) => {
             rowSelection={false}
             rows={rows}
             columns={columns}
+            loading={loading}
             sx={tableTheme}
             pageSizeOptions={[10]}
             initialState={{
@@ -21,8 +22,6 @@ const Table = ({ columns, rows, loading }) => {
             localeText={{
                 noRowsLabel: 'Nenhum funcionário encontrado',
             }}
-            loading={loading}
-
         />
     )
 };

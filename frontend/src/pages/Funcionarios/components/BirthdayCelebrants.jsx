@@ -28,7 +28,7 @@ const BirthdayCelebrants = ({ celebrants }) => {
             sx={{ 
                 boxShadow: 'none',
                 border: '1px solid',
-                borderColor: theme.palette.grey[200]
+                borderColor: theme.palette.grey[200],
             }}
         >
             <CardHeader 
@@ -46,7 +46,7 @@ const BirthdayCelebrants = ({ celebrants }) => {
                     color: "primary.main",
                 }}
             />
-            <CardContent sx={{ maxHeight: 320, overflowY: 'auto' }}>
+            <CardContent sx={{ maxHeight: 300, overflowY: 'auto' }}>
                 <List disablePadding>
                     {celebrants.map((celebrant) => (
                         <ListItem 

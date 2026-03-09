@@ -58,7 +58,7 @@ const DepartmentsChart = ({ employees }) => {
                     color: "primary.main",
                 }}
             />
-            <CardContent sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: 300 }}>
+            <CardContent sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: 280 }}>
                 { total > 0 ? ( <Chart series={series} /> ) : ( "Sem dados disponíveis" ) }
             </CardContent>
         </Card>

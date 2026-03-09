@@ -1,6 +1,6 @@
 import { PieChart } from '@mui/x-charts/PieChart';
 
-const Chart = ({ series, w = 200, h = 200, colors }) => {
+const Chart = ({ series, w = 180, h = 180, colors }) => {
     return (
         <PieChart
             series={series}

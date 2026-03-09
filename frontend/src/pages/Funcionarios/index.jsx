@@ -189,8 +189,8 @@ const Funcionarios = () => {
                     </Grid>
                     <Grid size={{ xs: 12, md: 3}}>
                         <Stack gap={2}>
-                            <BirthdayCelebrants celebrants={birthdayCelebrants}/>
                             <DepartmentsChart employees={employees} />
+                            <BirthdayCelebrants celebrants={birthdayCelebrants} />
                         </Stack>
                     </Grid>
                 </Grid>
