@@ -43,7 +43,8 @@ docker compose down
 ```
 
 ### Pré-visualização da tela de funcionários
-<img width="1904" height="959" alt="image" src="https://github.com/user-attachments/assets/4ffacea4-2ab9-44d5-89f9-f4d07403f77f" />
+<img width="1904" height="959" alt="image" src="https://github.com/user-attachments/assets/94e1ab30-e698-45e2-9d7e-cafc77676ade" />
+
 
 
 
